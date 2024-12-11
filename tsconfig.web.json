@@ -9,6 +9,8 @@
   "compilerOptions": {
     "composite": true,
     "baseUrl": ".",
+    "allowJs": true,                   // 允许导入 JS 文件
+    "checkJs": false,                  // 可选，是否检查 JS 文件的类型
     "paths": {
       "@renderer/*": [
         "src/renderer/src/*"
