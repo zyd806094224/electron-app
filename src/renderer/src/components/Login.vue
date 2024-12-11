@@ -3,6 +3,7 @@
     Login
     <h1>{{ name }}</h1>
     <button @click="click">登录</button>
+    <button @click="ipcHandle">ipc</button>
   </div>
 
 </template>
@@ -12,6 +13,8 @@ import { ref } from 'vue'
 import { login } from '../api'
 
 let name = ref('name')
+
+const ipcHandle = () => window.electron.ipcRenderer.send('ping')
 
 function click(){
   reqLogin()
