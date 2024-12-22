@@ -2,18 +2,122 @@
   <div class="root">
     <div class="left">
       <button @click="back">返回</button>
-      左侧区域
+      <el-tree ref="tree"
+               :data="data"
+               :default-checked-keys="defaultCheckedKeys"
+               :default-expanded-keys="defaultExpandedKeys"
+               node-key="id"
+               :props="defaultProps" @node-click="handleNodeClick" />
     </div>
-    <div class="right"></div>
+    <div class="right">
+      {{ content }}
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
+import { ref, onMounted } from 'vue'
+
+interface Tree {
+  id: string
+  label: string
+  children?: Tree[]
+}
 
 const router = useRouter()
-function back(){
+let content = ref('')
+
+let defaultCheckedKeys = ['1', '3']
+let defaultExpandedKeys = ref(['1', '3'])
+
+onMounted(() => {
+  defaultExpandedKeys.value = ['1-1', '3-1']
+})
+
+function back() {
   router.back()
+}
+
+const handleNodeClick = (data: Tree) => {
+  console.log(data)
+  content.value = data.label
+}
+
+const data: Tree[] = [
+  {
+    id: '1',
+    label: 'Level one 1',
+    children: [
+      {
+        id: '1-1',
+        label: 'Level two 1-1',
+        children: [
+          {
+            id: '1-1-1',
+            label: 'Level three 1-1-1'
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: '2',
+    label: 'Level one 2',
+    children: [
+      {
+        id: '2-1',
+        label: 'Level two 2-1',
+        children: [
+          {
+            id: '2-1-1',
+            label: 'Level three 2-1-1'
+          }
+        ]
+      },
+      {
+        id: '2-2',
+        label: 'Level two 2-2',
+        children: [
+          {
+            id: '2-2-1',
+            label: 'Level three 2-2-1'
+          }
+        ]
+      }
+    ]
+  },
+  {
+    id: '3',
+    label: 'Level one 3',
+    children: [
+      {
+        id: '3-1',
+        label: 'Level two 3-1',
+        children: [
+          {
+            id: '3-1-1',
+            label: 'Level three 3-1-1'
+          }
+        ]
+      },
+      {
+        id: '3-2',
+        label: 'Level two 3-2',
+        children: [
+          {
+            id: '3-2-1',
+            label: 'Level three 3-2-1'
+          }
+        ]
+      }
+    ]
+  }
+]
+
+const defaultProps = {
+  children: 'children',
+  label: 'label'
 }
 
 </script>
@@ -27,8 +131,8 @@ function back(){
 }
 
 .left {
-  background: #1b1b1f;
-  width: 150px;
+  background: #0000ff;
+  width: 200px;
   margin-right: 10px; /* 与右侧区域的间距 */
   display: flex;
   flex-direction: column;
