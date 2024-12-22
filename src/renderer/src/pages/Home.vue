@@ -3,6 +3,7 @@
   <div class="root">
     <div class="left">
       <button @click="back">返回</button>
+      <button @click="download">下载Excel</button>
       左侧区域
     </div>
     <div id="luckysheet" class="right">
@@ -14,6 +15,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import {onMounted} from 'vue'
+import {exportExcel} from '../utils/export.js'
 
 const router = useRouter()
 
@@ -109,6 +111,10 @@ function createALuckSheet(){
   //   container: 'luckysheet',//这里需要和容器的id名称一致
   //   lang: 'zh', //中文
   // })
+}
+
+function download(){
+  exportExcel(luckysheet.getAllSheets(),"下载")
 }
 
 function back() {
