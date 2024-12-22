@@ -9,6 +9,7 @@
     <button @click="testWatch">watch</button>
     <button @click="hooks">hooks</button>
     <button @click="piniaClick">pinia</button>
+    <button @click="toHome">主页跳转</button>
   </div>
 
 </template>
@@ -18,7 +19,9 @@ import { reactive, ref ,watch} from 'vue'
 import { login } from '../api'
 import { useCounter } from '../hooks/useCounter'
 import {useCountStore} from '../store/count'
+import {useRouter} from 'vue-router'
 
+const router = useRouter()
 interface Person{
   name: string
   age: string
@@ -49,6 +52,9 @@ function piniaClick(){
   countStore.increment(10)
 }
 
+function toHome(){
+  router.push('/home')
+}
 
 const ipcHandle = () => window.electron.ipcRenderer.send('ping')
 
