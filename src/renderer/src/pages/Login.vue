@@ -3,10 +3,12 @@
     Login
     <h1>{{ name }}</h1>
     <h1>{{ count }}</h1>
+    <h1>当前求和piniaTest:{{ countStore.sum }}</h1>
     <button @click="click">登录</button>
     <button @click="ipcHandle">ipc</button>
     <button @click="testWatch">watch</button>
     <button @click="hooks">hooks</button>
+    <button @click="piniaClick">pinia</button>
   </div>
 
 </template>
@@ -15,11 +17,14 @@
 import { reactive, ref ,watch} from 'vue'
 import { login } from '../api'
 import { useCounter } from '../hooks/useCounter'
+import {useCountStore} from '../store/count'
 
 interface Person{
   name: string
   age: string
 }
+
+const countStore = useCountStore()
 
 let name = ref('name')
 
@@ -38,6 +43,10 @@ function testWatch(){
 
 function hooks(){
   increment(1)
+}
+
+function piniaClick(){
+  countStore.increment(10)
 }
 
 
