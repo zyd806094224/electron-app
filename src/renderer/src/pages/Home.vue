@@ -28,7 +28,9 @@ interface Tree {
 const router = useRouter()
 let content = ref('')
 
+//默认选中
 let defaultCheckedKeys = ['1', '3']
+//默认展开
 let defaultExpandedKeys = ref(['1', '3'])
 
 onMounted(() => {
