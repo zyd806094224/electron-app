@@ -96,6 +96,11 @@ const luckySheetData =[{
 }]   // 默认
 
 onMounted(() => {
+  createALuckSheet()
+})
+
+
+function createALuckSheet(){
   //如果这里luckysheet.create报错
   //请使用 window.luckysheet.create
   options.data = luckySheetData
@@ -104,7 +109,7 @@ onMounted(() => {
   //   container: 'luckysheet',//这里需要和容器的id名称一致
   //   lang: 'zh', //中文
   // })
-})
+}
 
 function back() {
   router.back()
