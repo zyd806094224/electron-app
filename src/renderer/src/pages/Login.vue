@@ -10,6 +10,7 @@
     <button @click="hooks">hooks</button>
     <button @click="piniaClick">pinia</button>
     <button @click="toHome">主页跳转</button>
+    <button @click="toLuckySheet">表格跳转</button>
   </div>
 
 </template>
@@ -54,6 +55,10 @@ function piniaClick(){
 
 function toHome(){
   router.push('/home')
+}
+
+function toLuckySheet(){
+  router.push('/luckySheet')
 }
 
 const ipcHandle = () => window.electron.ipcRenderer.send('ping')
