@@ -11,6 +11,7 @@
     </div>
     <div class="right">
       {{ content }}
+      <Child :test="test"/>
     </div>
   </div>
 </template>
@@ -18,6 +19,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { ref, onMounted } from 'vue'
+import Child from '../components/Child.vue'
 
 interface Tree {
   id: string
@@ -27,6 +29,8 @@ interface Tree {
 
 const router = useRouter()
 let content = ref('')
+
+let test = ref('haha')
 
 //默认选中
 let defaultCheckedKeys = ['1', '3']
