@@ -2,7 +2,8 @@
   <div class="root">
     <div class="left">
       <button @click="back">返回</button>
-      <span>{{childUpdateText}}</span>
+      <span>{{ childUpdateText }}</span>
+      <span>{{ childMittUpdateText }}</span>
       <el-tree ref="tree"
                :data="data"
                :default-checked-keys="defaultCheckedKeys"
@@ -12,15 +13,16 @@
     </div>
     <div class="right">
       {{ content }}
-      <Child :test="test" @update="handleUpdate"/>
+      <Child :test="test" @update="handleUpdate" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import Child from '../components/Child.vue'
+import emitter from '../utils/emitter'
 
 interface Tree {
   id: string
@@ -35,7 +37,9 @@ let test = ref('haha')
 
 let childUpdateText = ref('等待子组件更新我')
 
-function handleUpdate(value){
+let childMittUpdateText = ref('mitt更新')
+
+function handleUpdate(value) {
   childUpdateText.value = value
 }
 
@@ -46,6 +50,13 @@ let defaultExpandedKeys = ref(['1', '3'])
 
 onMounted(() => {
   defaultExpandedKeys.value = ['1-1', '3-1']
+  emitter.on('mittTest', (value: string) => {
+    childMittUpdateText.value = value
+  })
+})
+
+onUnmounted(() => {
+  emitter.off('mittTest')
 })
 
 function back() {
