@@ -1,5 +1,6 @@
 import { customRef } from 'vue'
 
+//默认暴露
 export default function(initValue: string, delay: number) {
   let msg = customRef((track, trigger) => {
     let timer: NodeJS.Timeout
