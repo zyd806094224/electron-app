@@ -2,6 +2,7 @@
   <div class="root">
     <div class="left">
       <button @click="back">返回</button>
+      <span>{{childUpdateText}}</span>
       <el-tree ref="tree"
                :data="data"
                :default-checked-keys="defaultCheckedKeys"
@@ -11,7 +12,7 @@
     </div>
     <div class="right">
       {{ content }}
-      <Child :test="test"/>
+      <Child :test="test" @update="handleUpdate"/>
     </div>
   </div>
 </template>
@@ -31,6 +32,12 @@ const router = useRouter()
 let content = ref('')
 
 let test = ref('haha')
+
+let childUpdateText = ref('等待子组件更新我')
+
+function handleUpdate(value){
+  childUpdateText.value = value
+}
 
 //默认选中
 let defaultCheckedKeys = ['1', '3']
