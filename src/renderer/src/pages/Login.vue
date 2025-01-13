@@ -11,6 +11,9 @@
     <button @click="piniaClick">pinia</button>
     <button @click="toHome">主页跳转</button>
     <button @click="toLuckySheet">表格跳转</button>
+    <button @click="promiseTest">promise测试</button>
+    <button @click="promiseRaceClick">promiseRace测试</button>
+    <button @click="closure">闭包测试</button>
   </div>
 
 </template>
@@ -21,6 +24,8 @@ import { login } from '../api'
 import { useCounter } from '../hooks/useCounter'
 import {useCountStore} from '../store/count'
 import {useRouter} from 'vue-router'
+import { promiseAllTest, promiseRaceTest } from '../utils/promise'
+import { closureTest } from '../utils/closure'
 
 const router = useRouter()
 interface Person{
@@ -36,6 +41,8 @@ let person = reactive({name: '111',age: 11})
 
 // 使用自定义 Hooks
 const { count, increment, decrement, reset } = useCounter(10);
+
+const fn = closureTest()
 
 watch(() => person.name,(newVal,oldVal) => {
   console.log(newVal,oldVal)
@@ -59,6 +66,18 @@ function toHome(){
 
 function toLuckySheet(){
   router.push('/luckySheet')
+}
+
+function promiseTest(){
+  promiseAllTest()
+}
+
+function promiseRaceClick(){
+  promiseRaceTest()
+}
+
+function closure(){
+  fn()
 }
 
 const ipcHandle = () => window.electron.ipcRenderer.send('ping')
