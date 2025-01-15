@@ -26,6 +26,7 @@ import {useCountStore} from '../store/count'
 import {useRouter} from 'vue-router'
 import { promiseAllTest, promiseRaceTest } from '../utils/promise'
 import { closureTest } from '../utils/closure'
+import { CACHE_KEY, useCache } from '../hooks/useCache'
 
 const router = useRouter()
 interface Person{
@@ -40,13 +41,24 @@ let name = ref('name')
 let person = reactive({name: '111',age: 11})
 
 // 使用自定义 Hooks
-const { count, increment, decrement, reset } = useCounter(10);
+const { count, increment, decrement, reset } = useCounter(10)
+
+const {wsCache} = useCache()
 
 const fn = closureTest()
 
 watch(() => person.name,(newVal,oldVal) => {
   console.log(newVal,oldVal)
 })
+
+
+async function testUseCache(){
+  let userInfo = wsCache.get(CACHE_KEY.USER)
+  if(!userInfo){
+    // await getUserInfo()
+  }
+  wsCache.set(CACHE_KEY.USER,userInfo)
+}
 
 function testWatch(){
   person.name += '~'

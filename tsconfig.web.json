@@ -12,6 +12,7 @@
     "baseUrl": ".",
     "allowJs": true,                   // 允许导入 JS 文件
     "checkJs": false,                  // 可选，是否检查 JS 文件的类型
+    "esModuleInterop": true,           //当TypeScript模块使用export=语法时，需在tsconfig.json中设置esModuleInterop为true，以便支持默认导入
     "paths": {
       "@renderer/*": [
         "src/renderer/src/*"
