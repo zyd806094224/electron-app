@@ -1,19 +1,21 @@
 <template>
-  <div>
-    Login
-    <h1>{{ name }}</h1>
-    <h1>{{ count }}</h1>
-    <h1>当前求和piniaTest:{{ countStore.sum }}</h1>
-    <button @click="click">登录</button>
-    <button @click="ipcHandle">ipc</button>
-    <button @click="testWatch">watch</button>
-    <button @click="hooks">hooks</button>
-    <button @click="piniaClick">pinia</button>
-    <button @click="toHome">主页跳转</button>
-    <button @click="toLuckySheet">表格跳转</button>
-    <button @click="promiseTest">promise测试</button>
-    <button @click="promiseRaceClick">promiseRace测试</button>
-    <button @click="closure">闭包测试</button>
+  <div class="login-root">
+    <span>{{ name }}</span>
+    <span>{{ count }}</span>
+    <span>当前求和piniaTest:{{ countStore.sum }}</span>
+    <div class="content">
+      <button @click="click">登录</button>
+      <button @click="ipcHandle">ipc</button>
+      <button @click="testWatch">watch</button>
+      <button @click="hooks">hooks</button>
+      <button @click="piniaClick">pinia</button>
+      <button @click="toHome">主页跳转</button>
+      <button @click="toLuckySheet">表格跳转</button>
+      <button @click="toECharts">ECharts跳转</button>
+      <button @click="promiseTest">promise测试</button>
+      <button @click="promiseRaceClick">promiseRace测试</button>
+      <button @click="closure">闭包测试</button>
+    </div>
   </div>
 
 </template>
@@ -80,6 +82,10 @@ function toLuckySheet(){
   router.push('/luckySheet')
 }
 
+function toECharts(){
+  router.push('/echarts')
+}
+
 function promiseTest(){
   promiseAllTest()
 }
@@ -110,5 +116,16 @@ async function reqLogin(){
 </script>
 
 <style scoped>
+
+.login-root{
+  display: flex;
+  flex-direction: column;
+}
+
+.content{
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+}
 
 </style>
